@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DUE LUNE - 360 Lettere Nascoste a Milano | Buio Innocente</title>
+    <meta name="description"
+        content="360 lettere scritte a mano, nascoste a Milano. Un concept album sulla perdita, l'amore impossibile tra un Troll e uno Gnomo. Di Buio Innocente.">
+    <meta property="og:title" content="DUE LUNE - Il Troll e lo Gnomo">
+    <meta property="og:description" content="360 lettere nascoste a Milano. Un concept album sulla perdita.">
+    <meta property="og:type" content="website">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
+        /* ==================== CSS VARIABLES ==================== */
+        :root {
+            --stone-dark: #2d374830;
+            --stone-mid: #4A5568;
+            --stone-light: #718096;
+            --flesh-orange: #d4826f38;
+            --blood-red: #8B2E2E;
+            --parchment: #E8DCC4;
+            --moon-glow: #F0E6D2;
+            --night-black: #1A202C;
+            --night-blue: #2C3E50;
+
+            --font-heading: 'Playfair Display', serif;
+            --font-body: "Playfair Display", serif;
+            --font-accent: "Playfair Display", serif;
+
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==================== RESET ==================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--night-black);
+            color: var(--parchment);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        ::selection {
+            background: var(--blood-red);
+            color: var(--parchment);
+        }
+
+        /* ==================== BACKGROUND STARS ==================== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--moon-glow);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .accent-text {
+            font-family: var(--font-accent);
+            font-style: italic;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: rgba(26, 32, 44, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(232, 220, 196, 0.1);
+            transition: var(--transition-smooth);
+            text-align: center;
+            font-size: 1.75rem;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--parchment);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .logo:hover {
+            color: var(--blood-red);
+        }
+
+        .logo-moons {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 5px var(--moon-glow));
+        }
+
+        /* ==================== HERO SPLIT ==================== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-half {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing-lg);
+            position: relative;
+            transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-half:hover {
+            flex: 1.3;
+        }
+
+        .hero-troll {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./troll-gnomo-gelo-incendio.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-gnome {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./gnomo-troll-di-spalle.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-visual {
+            width: clamp(200px, 30vw, 400px);
+            height: clamp(200px, 30vw, 400px);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(5rem, 15vw, 10rem);
+            margin-bottom: var(--spacing-md);
+            opacity: 0.4;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(0.5);
+        }
+
+        .hero-half:hover .hero-visual {
+            opacity: 1;
+            transform: scale(1.1) rotate(5deg);
+            filter: grayscale(0);
+        }
+
+        .hero-label {
+            font-family: var(--font-accent);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            margin-bottom: var(--spacing-xs);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            opacity: 0.8;
+        }
+
+        .hero-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            text-shadow: 0 0 30px rgba(139, 46, 46, 0.8),
+                0 0 60px rgba(139, 46, 46, 0.4);
+            margin-bottom: var(--spacing-sm);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(139, 46, 46, 0.6);
+            }
+
+            50% {
+                text-shadow: 0 0 40px rgba(139, 46, 46, 1);
+            }
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            opacity: 0.9;
+            font-family: var(--font-accent);
+        }
+
+        .cta-button {
+            margin-top: var(--spacing-md);
+            padding: 1rem 2.5rem;
+            background: var(--blood-red);
+            color: var(--parchment);
+            border: 2px solid var(--parchment);
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            cursor: pointer;
+            pointer-events: all;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--parchment);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            color: var(--blood-red);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(139, 46, 46, 0.4);
+        }
+
+
+        /* ==================== SECTIONS ==================== */
+        .section {
+            /*min-height: 100vh;*/
+            padding: var(--spacing-xl) var(--spacing-md);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('https://s3.amazonaws.com/gather.fandalism.com/800x800%2D10674189%2D%2DBE2DB227%2D2BD9%2D48E5%2DB0928129025BB4DE%2D%2D0%2D%2D13980051%2D%2Dwmremovetransformed1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-top: 3px solid var(--blood-red);
+            background-position: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            max-width: 900px;
+            margin: 0 auto var(--spacing-lg);
+            opacity: 0.95;
+            line-height: 2;
+        }
+
+        .section-intro span {
+            padding: 4px;
+            border-radius: 25%;
+            background-color: var(--blood-red);
+        }
+
+        .modal span {
+            padding: 4px;
+            border-radius: 5px;
+            background-color: var(--blood-red);
+        }
+
+
+        /* ==================== CARDS GRID ==================== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.6), rgba(29, 38, 55, 0.6));
+            border: 2px solid var(--stone-mid);
+            padding: var(--spacing-md);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 46, 46, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--blood-red);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(139, 46, 46, 0.3);
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-sm);
+            display: block;
+            transition: var(--transition-smooth);
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            margin-bottom: var(--spacing-sm);
+            color: var(--moon-glow);
+        }
+
+        .card-description {
+            opacity: 0.85;
+            line-height: 1.8;
+            color: var(--moon-glow)
+        }
+
+
+        /* ==================== QUOTE SECTION ==================== */
+        .quote-section {
+            padding: var(--spacing-xl) var(--spacing-md);
+            background: linear-gradient(90deg, black, var(--night-black), rgba(0, 0, 0, 0.6), var(--night-black), black), url('https://i.scdn.co/image/ab67618600001016c4783d3c63c0108ed93d4edf');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-top: 3px solid var(--blood-red);
+        }
+
+
+        .quote {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 2rem);
+            font-family: var(--font-accent);
+            font-style: italic;
+            line-height: 2;
+            position: relative;
+        }
+
+
+        .quote::before,
+        .quote::after {
+            content: '"';
+            font-size: 5rem;
+            color: var(--blood-red);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .quote::before {
+            top: 0;
+            left: 0;
+        }
+
+        .quote::after {
+            bottom: 0;
+            right: 0;
+        }
+
+        /* ==================== CTA SECTION ==================== */
+        .cta-section {
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('./gnomo.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-top: 3px solid var(--blood-red);
+
+        }
+
+        .cta-section h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-lg);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            text-decoration: none;
+            border: 2px solid;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--blood-red);
+            color: var(--parchment);
+            border-color: var(--parchment);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--parchment);
+            border-color: var(--blood-red);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(139, 46, 46, 0.4);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('./gnomo_troll_barca.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+
+            padding: var(--spacing-lg) var(--spacing-md);
+            text-align: center;
+            border-top: 3px solid var(--blood-red);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-tagline {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            margin: var(--spacing-sm) 0;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            font-size: 2rem;
+        }
+
+        .social-links a {
+            color: var(--parchment);
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: var(--blood-red);
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        .footer-copy {
+            margin-top: var(--spacing-md);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .info-text {
+            font-size: 0.8rem;
+            line-height: 2;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 968px) {
+
+            .hero {
+                display: none;
+            }
+
+            .section {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-icon {
+                display: none;
+            }
+
+
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Stars -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <span class="logo-moons">🌙</span>
+        DUE LUNE
+        <span class="logo-moons">🌙</span>
+    </div>
+
+
+    <!--  <iframe data-testid="embed-iframe" style="border-radius:12px; margin-top: var(--spacing-xl);" 
+        src="https://open.spotify.com/embed/artist/00CgQ7k7Xx6KCJVD7kTRcR?utm_source=generator" width="100%"
+        height="152" frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+-->
+    <!-- Hero Split -->
+    <section class="hero" style="display: none;">
+
+        <div class="hero-half hero-troll">
+        </div>
+
+        <div class="hero-center">
+            <h1 class="hero-title">360 LETTERE</h1>
+            <p class="hero-tagline">Nascoste a Milano</p>
+            <a href="#progetto" class="cta-button">ENTRA NEL LABIRINTO</a>
+        </div>
+
+        <div class="hero-half hero-gnome">
+        </div>
+    </section>
+
+    <!-- Il Progetto -->
+    <section id="progetto" class="section">
+        <div class="section-intro" style="display: none;">
+            Ti ho scritto <strong>360 lettere</strong> a pergamena che non ti invierò mai.<br>
+            <br>
+            <span>360</span> Una per ogni grado dell'amore assoluto.<br>
+            <span>360</span> Una per ogni verso del mio album dedicato a te.<br>
+            <span>360</span> Perché lontano da te ogni minuto dura 360 secondi.<br>
+            <br>
+            Le ho legate con un <strong style="color: var(--blood-red);">fiocco rosso</strong>.<br>
+            Le ho nascoste in giro per Milano, dove passeggiavamo insieme, dove ci siamo innamorati.
+            <br>
+            <br>
+            Chissà se mai le leggerai...
+        </div>
+
+        <div class="cards-grid">
+            <div class="card" data-bs-toggle="modal" data-bs-target="#albumModal">
+                <span class="card-icon">🎵</span>
+                <h3 class="card-title">L'Album</h3>
+                <p class="card-description">
+                    10 capitoli (+1). Un viaggio dalla nostalgia alla pietrificazione finale.
+                    <strong>DUE LUNE</strong> è un concept album sulla perdita e il rifiuto di guarire.
+                </p>
+            </div>
+
+            <div class="card" data-bs-toggle="modal" data-bs-target="#lettereModal" style="display: none;">
+                <span class="card-icon">📜</span>
+                <h3 class="card-title">Le 360 Lettere</h3>
+                <p class="card-description">
+                    Scritte a mano, numerate, legate con fiocco rosso sangue.
+                    Nascoste in giro per Milano come un atto d'amore disperato.
+                </p>
+            </div>
+
+            <div class="card" data-bs-toggle="modal" data-bs-target="#conceptModal">
+                <span class="card-icon">🎭</span>
+                <h3 class="card-title">Il Concept</h3>
+                <p class="card-description">
+                    La storia di un Troll che si pietrifica al sole e uno Gnomo che si dondola sotto due lune.
+                    Un amore impossibile tra creature che vivono in dimensioni opposte.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="quote-section">
+        <blockquote class="quote">
+            Anche lontani avrò cura di te <br>
+            e veglierò sulla tua anima respirandoti dal cuore.
+        </blockquote>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" style="display: none;">
+        <h2>Entra nel Labirinto</h2>
+        <p class="section-intro">
+            Trova una lettera. Leggi la storia che non ho avuto il coraggio di inviarti.
+        </p>
+        <div class="cta-buttons">
+            <div class="btn btn-primary" data-bs-target="#mapModal" data-bs-toggle="modal">🗺️ Trova le Lettere</div>
+            <a href="https://open.spotify.com/intl-it/album/4Z70UQ6HnL2osLWfG8YQAv?si=0jAxWtDXSw6gS6ikBpgubw"
+                class="btn btn-secondary">🎵 Ascolta l'Album</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contatti">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://instagram.com/buioinnocente" target="_blank" aria-label="Instagram"><i
+                        class="bi bi-instagram"></i></a>
+                <a href="https://open.spotify.com/intl-it/artist/00CgQ7k7Xx6KCJVD7kTRcR?si=ty8cdZJfT_qImVzYLCzgNg"
+                    target="_blank" aria-label="Spotify"><i class="bi bi-spotify"></i></a>
+                <a href="https://music.apple.com/it/artist/buio-innocente/1850211695" target="_blank"
+                    aria-label="Apple Music"><i class="bi bi-apple-music"></i></a>
+                <a href="https://genius.com/artists/Buio-innocente" target="_blank" aria-label="Testi"><img
+                        style="    width: 32px;"
+                        src="https://assets.genius.com/images/apple-touch-icon.png?1763411374"></a>
+                <a href="https://www.youtube.com/@buio_official_channel" target="_blank" aria-label="YouTube"><i
+                        class="bi bi-youtube"></i></a>
+                <a href="https://www.tiktok.com/@buio_innocente" target="_blank" aria-label="TikTok"><i
+                        class="bi bi-tiktok"></i></a>
+            </div>
+
+            <p class="footer-copy">
+                &copy; 2025 Buio Innocente - DUE LUNE<br>
+                360 lettere, un'unica verità: ti amo ancora.
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="albumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content"
+                style="background-color: var(--night-black); border: 2px solid var(--blood-red);">
+                <div class="modal-header" style="border-bottom: 1px solid var(--stone-mid);">
+                    <h5 class="modal-title" id="albumModalLabel"
+                        style="color: var(--moon-glow); font-family: var(--font-heading);">
+                        🎵 DUE LUNE: L'Anatomia della Pietrificazione
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body" style="color: var(--parchment);">
+                    <p class="info-text">
+                        <span>Non tutte le storie hanno un lieto fine.</span> <br>
+
+                        Questo concept album è un viaggio in un amore assoluto e nella sua fine traumatica: traccia le
+                        fasi del lutto, ma non verso la guarigione. <br>
+                    </p>
+
+                    <p class="info-text">
+                        Si parte dalla nostalgia per un eden perduto e le <span>promesse</span> iniziali, spezzate da un
+                        evento
+                        catastrofico e indelebile (<span>5 luglio</span>). <br>
+
+                        Da lì, la narrazione sprofonda nell'analisi della verità dolorosa (<span>Deserto e
+                            Muffa</span>), nel
+                        rifiuto attivo di superare il trauma (<span>Non voglio guarire)</span> e nella depressione
+                        paralizzante che
+                        trasforma la carne in <span>roccia</span>. <br>
+
+                    </p>
+                    <p class="info-text">
+                        Si passa all'accettazione amara di essere diventati un <span>Peluche nell'armadio</span>, un
+                        oggetto
+                        dimenticato ma mai buttato via, simbolo di un ricordo che non si può più cancellare. <br>
+
+                        È una storia di ossessione, di ricordi a cui aggrapparsi (<span>Stretto al polso</span>) e di
+                        rancore
+                        (<span>Buio</span>), che culmina nell'accettazione di un dolore che diventa identità
+                        (<span>Pietra</span>). <br>
+                    </p>
+                    <p class="info-text">
+                        L'album si chiude con la consapevolezza che, nonostante tutto, questo amore resta l'unica
+                        <span>Costante</span>: una ferita da cui, in fondo, non si vuole guarire.
+                    </p>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--stone-mid);">
+                    <a href="https://open.spotify.com/intl-it/album/4Z70UQ6HnL2osLWfG8YQAv?si=0jAxWtDXSw6gS6ikBpgubw"
+                        class="btn btn-primary">
+                        Ascolta Ora su Spotify
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="lettereModal" tabindex="-1" aria-labelledby="lettereModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content"
+                style="background-color: var(--night-black); border: 2px solid var(--blood-red);">
+                <div class="modal-header" style="border-bottom: 1px solid var(--stone-mid);">
+                    <h5 class="modal-title" id="lettereModalLabel"
+                        style="color: var(--moon-glow); font-family: var(--font-heading);">
+                        📜 Le 360 Lettere: L'Anatomia di una Fuga
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body" style="color: var(--parchment);">
+                    <p class="info-text">
+                        Le 360 pergamene non sono semplici messaggi, ma il tentativo del Troll di rigettare all'esterno
+                        il trauma che lo ha pietrificato. Sono scritte in un codice intimo, strutturate in <span>tre
+                            atti
+                            emotivi</span> che rispecchiano il viaggio dell'album:
+                    </p>
+                    <ul>
+                        <li class="info-text"><span>L'Accusa e il Trauma:</span> La rielaborazione cruda del tentativo
+                            di suicidio e il
+                            crollo
+                            emotivo del Troll.</li>
+                        <li class="info-text"><span>La Pietrificazione:</span>Le riflessioni sulla trasformazione in
+                            Roccia di Giorno, la
+                            negazione del lutto e la dipendenza affettiva.</li>
+                        <li class="info-text"><span>La Memoria (i Frammenti):</span> I ricordi fugaci e ossessivi dello
+                            Gnomo che non
+                            smettono di
+                            tormentare il Troll, l'unica ragione per cui la pietra si scioglie di notte.</li>
+                    </ul>
+                    <p class="info-text">
+                        Ogni pergamena contiene frammenti di testi inediti e versi dell'album, legati da un <span>fiocco
+                            rosso</span> a simboleggiare l'amore fatale. Sono la mappa del dolore del Troll, nascoste
+                        dove il
+                        ricordo è più vivo.
+                    </p>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--stone-mid);">
+                    <a href="https://open.spotify.com/intl-it/album/4Z70UQ6HnL2osLWfG8YQAv?si=0jAxWtDXSw6gS6ikBpgubw"
+                        class="btn btn-primary">
+                        🎵 Ascolta DUE LUNE e cerca la tua lettera
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="conceptModal" tabindex="-1" aria-labelledby="conceptModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content"
+                style="background-color: var(--night-black); border: 2px solid var(--blood-red);">
+                <div class="modal-header" style="border-bottom: 1px solid var(--stone-mid);">
+                    <h5 class="modal-title" id="conceptModalLabel"
+                        style="color: var(--moon-glow); font-family: var(--font-heading);">
+                        🎭 Il Concept: Troll, Gnomo e Due Lune
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body" style="color: var(--parchment);">
+                    <p class="info-text">
+                        <span>Il Troll (Buio Innocente)</span>
+                        <br>
+                        È la creatura che non ha retto il trauma. Dopo il tentativo di suicidio dello Gnomo, il Troll è
+                        <span>scappato</span> per l'eccessiva paura di perdere l'amore per sempre. Non riuscendo
+                        a processare il
+                        dolore e la colpa, si chiude nella dipendenza e nella corazza emotiva. Durante il giorno, si
+                        pietrifica (la Roccia di Giorno) per difendersi dal mondo e scrive le lettere solo di notte,
+                        quando la pietra si scioglie.
+                    </p>
+                    <p class="info-text">
+                        <span>Lo Gnomo</span>
+                        <br>
+                        È l'amore tormentato, la persona che ha lottato contro i propri demoni fino al tentativo di
+                        togliersi la vita. La sua sofferenza è il catalizzatore della crisi emotiva e della fuga del
+                        Troll, che lo ha trasformato in un ricordo ossessivo e irraggiungibile.
+                    </p>
+                    <p class="info-text">
+                        <span>Le Due Lune</span>
+                        <br>
+                        Simbolo di un amore impossibile: il Troll è una creatura notturna (lunare) e lo Gnomo si trova
+                        ora in una dimensione opposta. <span style="font-style: italic;">L'unica cosa che li unisce sono
+                            le due lune</span>
+                    </p>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--stone-mid);">
+                    <a href="https://genius.com/artists/Buio-innocente" target="_blank" class="btn btn-secondary"
+                        style="border-color: var(--stone-mid);">
+                        Testi Completi (Genius)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="lettereModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content"
+                style="background-color: var(--night-black); border: 2px solid var(--blood-red);">
+                <div class="modal-header" style="border-bottom: 1px solid var(--stone-mid);">
+                    <h5 class="modal-title" id="lettereModalLabel"
+                        style="color: var(--moon-glow); font-family: var(--font-heading);">
+                        📜 Dove ho nascosto in piena vista le lettere
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body" style="color: var(--parchment);">
+                    <img style="width: 100%;" src="./mappa lettere.png">
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--stone-mid);">
+                    <a href="https://open.spotify.com/intl-it/album/4Z70UQ6HnL2osLWfG8YQAv?si=0jAxWtDXSw6gS6ikBpgubw"
+                        class="btn btn-primary">
+                        🎵 Ascolta DUE LUNE e cerca la tua lettera
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+</html>
